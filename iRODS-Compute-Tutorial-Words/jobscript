@@ -1,0 +1,12 @@
+# shell for the job:
+#PBS -S /bin/bash
+# job requires at most 0 hours, 4 minutes
+# and 0 seconds wallclock time and uses one 16-core node:
+#PBS -lwalltime=00:04:00 -lnodes=1:cores16
+
+#iRODS + Python
+module load icommands
+module load python/2.7.9
+cd /home/christin/iRODS-Compute-Tutorial
+# call the program
+python wordsWorkflow.py > outputjob

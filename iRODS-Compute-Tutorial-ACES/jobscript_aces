@@ -1,0 +1,27 @@
+# shell for the job:
+#PBS -S /bin/bash
+# job requires at most 0 hours, 4 minutes
+# and 0 seconds wallclock time and uses one 16-core node:
+#PBS -lwalltime=00:04:00 -lnodes=1
+
+#iRODS + Python
+module load icommands
+module load python/2.7.9
+cd /home/christin/iRODS-Compute-Tutorial-ACES
+
+#parameters for iRODS connection
+export HOST=145.100.57.185
+export PORT=1247
+export USER=christine
+export PASSWORD=c1estMOI
+export ZONE=aliceZone
+
+#iRODS user to share results with
+export SHARE=irods-user50
+
+#download reference data
+wget -P $TMPDIR/data_christine https://ndownloader.figshare.com/files/4851460
+export DATAPATH=$TMPDIR/data_christine/4851460
+
+# call the program
+python acesWorkflow.py > outputjob_aces
