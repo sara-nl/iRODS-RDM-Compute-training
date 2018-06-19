@@ -7,21 +7,21 @@
 #iRODS + Python
 module load icommands
 module load python/2.7.9
-cd /home/christin/iRODS-Compute-Tutorial-ACES
+cd /home/<FILL IN>/iRODS-Compute-Tutorial-ACES
 
 #parameters for iRODS connection
-export HOST=145.100.57.185
+export HOST=<FILL IN>
 export PORT=1247
-export USER=christine
-export PASSWORD=c1estMOI
-export ZONE=aliceZone
+export USER=<FILL IN>
+export PASSWORD=<FILL IN>
+export ZONE=<FILL IN>
 
 #iRODS user to share results with
-export SHARE=irods-user50
+export SHARE=<FILL IN>
 
 #download reference data
-wget -P $TMPDIR/data_christine https://ndownloader.figshare.com/files/4851460
-export DATAPATH=$TMPDIR/data_christine/4851460
+wget -P $TMPDIR/<FILL IN> https://ndownloader.figshare.com/files/4851460
+export DATAPATH=$TMPDIR/<FILL IN>/4851460
 
 # call the program
 python acesWorkflow.py > outputjob_aces
