@@ -53,7 +53,8 @@ We will now prepare the compute workflow as it should be executed on any worker 
 We prepared some parts of the workflow for you. Please download the code with:
 
 ```sh
-git clone ...
+git clone https://github.com/sara-nl/RDM-Compute-training
+cd RDM-Compute-training/iRODS-Compute-Tutorial-Words
 ```
 
 ### Create data folders on **scratch**
