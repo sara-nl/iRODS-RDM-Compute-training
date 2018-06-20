@@ -107,7 +107,14 @@ print "Modify: ", obj.modify_time
 print "Metadata: ", obj.metadata.items()
 ```
 
+Less code to write to display the full object:
+```
+vars(obj)
+```
+
 **Remark**: iRODS stores times in UNIX [epoch](https://en.wikipedia.org/wiki/Unix_time) time, but the python client always returns times in UTF (2 hours behind our local time).
+
+UTC ?
 
 **Exercise** Try to put data to an undefined path or your neighbours home collection (spelling mistake ...).
 
@@ -186,6 +193,10 @@ print "Create: ", obj.create_time
 print "Modify: ", obj.modify_time
 print "Metadata: ", obj.metadata.items()
 ```
+
+```
+vars(obj)
+```
 We can now stream in our data into that placeholder
 
 ```py
@@ -204,6 +215,9 @@ print "Checksum:", obj.checksum
 print "Create: ", obj.create_time
 print "Modify: ", obj.modify_time
 print "Metadata: ", obj.metadata.items()
+```
+```
+vars(obj)
 ```
 
 ## iRODS collections
@@ -237,6 +251,9 @@ coll = session.collections.get(iHome)
 coll.subcollections
 ```
 
+```
+[vars(coll) for coll in coll.subcollections]
+```
 ### Remove a Collection
 Remove a collection recursively with all data objects.
 
@@ -249,6 +266,9 @@ Do not be fooled, the python object 'coll' looks like as if the collection is st
 ```py
 coll = session.collections.get(iHome)
 coll.subcollections
+```
+```
+[vars(coll) for coll in coll.subcollections] 
 ```
 
 **Exercise** Create a collection, add some data to the collection and add some metadata to the collection (analogously to data object metadata).
@@ -273,6 +293,10 @@ while len(walk) > 0:
       		session.data_objects.put(srcDir+'/'+fname, newColl.path+'/'+fname)
 ```
 
+There is mixed tab and whitespace in the code. When copy&paste the code, it is not working,
+The standard recommends 4 spaces.
+https://www.python.org/dev/peps/pep-0008/#tabs-or-spaces
+
 ### Iterate over collection
 Similar to we walked over a directory with sub directories and files in the unix file system we can walk over collections and subcollections in iRODS. Here we walk over the whole aliceInWonderland collection and list Collections and Data objects:
 
@@ -292,6 +316,9 @@ session.permissions.get(coll)
 session.permissions.get(obj)
 ```
 
+```
+[vars(p) for p in session.permissions.get(coll)]
+```
 Here we share a collection with the iRODS group public. Every member of the group will have read rights.
 
 ```py
