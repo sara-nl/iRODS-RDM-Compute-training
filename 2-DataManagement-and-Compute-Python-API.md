@@ -64,7 +64,6 @@ import getpass
 pw = getpass.getpass().encode('base64')
 ```
 Now we can create an iRODS session:
-
 ```
 from irods.session import iRODSSession
 session = iRODSSession(host='sara-alice.grid.surfsara.nl', port=1247, user='irods-user1', password=pw.decode('base64'), zone='aliceZone')
