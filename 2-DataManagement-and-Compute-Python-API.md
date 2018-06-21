@@ -111,9 +111,7 @@ Less code to write to display the full object:
 vars(obj)
 ```
 
-**Remark**: iRODS stores times in UNIX [epoch](https://en.wikipedia.org/wiki/Unix_time) time, but the python client always returns times in UTF (2 hours behind our local time).
-
-UTC ?
+**Remark**: iRODS stores times in UNIX [epoch](https://en.wikipedia.org/wiki/Unix_time) time, but the python client always returns times in UTC (2 hours behind our local time).
 
 **Exercise** Try to put data to an undefined path or your neighbours home collection (spelling mistake ...).
 
