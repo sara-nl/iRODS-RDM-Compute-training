@@ -9,8 +9,8 @@ from irods.models import Collection, DataObject, CollectionMeta, DataObjectMeta
 # iRODS connection
 host='145.100.57.185'
 port=1247
-user='christine'
-password='c1estMOI'
+user='<your username>'
+password='<your password>'
 zone='aliceZone'
 
 # data search

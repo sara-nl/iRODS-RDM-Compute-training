@@ -72,9 +72,12 @@ ensure_dir(resultsDir)
 
 ### Connecting to iRODS
 
+```py                                                                                                                                                                                                                                        import getpass                                                                                                                                                                                                                               
+pw = getpass.getpass().encode('base64')                                                                                                                                                                                                      ```
+
 ```py
 from irods.session import iRODSSession
-session = iRODSSession(host='sara-alice.grid.surfsara.nl', port=1247, user='irods-user1', password='<your password>', zone='aliceZone')
+session = iRODSSession(host='sara-alice.grid.surfsara.nl', port=1247, user='irods-user1', password=pw.decode('base64'), zone='aliceZone')
 ```
 
 ### Searching for files
@@ -129,6 +132,10 @@ session.data_objects.put(resFile, coll.path + '/' + f)
 ```
 
 ### Introduce some metadata for provenance
+
+```py
+import datetime
+```
 
 ```py
 obj = session.data_objects.get(coll.path + '/' + f)
