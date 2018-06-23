@@ -301,7 +301,7 @@ Similar to we walked over a directory with sub directories and files in the unix
 for srcColl, colls, objs in coll.walk():
     print 'C-', srcColl.path
     for o in objs:
-    print o.name
+        print o.name
 ```
 
 ## Sharing data
