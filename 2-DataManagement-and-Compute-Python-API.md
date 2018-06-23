@@ -249,7 +249,7 @@ coll.subcollections
 ```
 
 ```
-[vars(coll) for coll in coll.subcollections]
+[vars(c) for c in coll.subcollections]
 ```
 ### Remove a Collection
 Remove a collection recursively with all data objects.
@@ -265,7 +265,7 @@ coll = session.collections.get(iHome)
 coll.subcollections
 ```
 ```
-[vars(coll) for coll in coll.subcollections] 
+[vars(c) for c in coll.subcollections] 
 ```
 
 **Exercise** Create a collection, add some data to the collection and add some metadata to the collection (analogously to data object metadata).
@@ -279,15 +279,15 @@ import os
 dPath = os.environ['HOME'] + '/aliceInWonderland'
 walk = [dPath]
 while len(walk) > 0:
-	for srcDir, dirs, files in os.walk(walk.pop()):
-		print srcDir, dirs, files
-		walk.extend(dirs)
-   		iPath = iHome + srcDir.split(os.environ['HOME'])[1]
-   		print "CREATE", iPath
-   		newColl = session.collections.create(iPath)
-   		for fname in files:
-			print "CREATE", newColl.path+'/'+fname
-      		session.data_objects.put(srcDir+'/'+fname, newColl.path+'/'+fname)
+    for srcDir, dirs, files in os.walk(walk.pop()):
+        print srcDir, dirs, files
+        walk.extend(dirs)
+        iPath = iHome + srcDir.split(os.environ['HOME'])[1]
+        print "CREATE", iPath
+        newColl = session.collections.create(iPath)
+        for fname in files:
+            print "CREATE", newColl.path+'/'+fname
+            session.data_objects.put(srcDir+'/'+fname, newColl.path+'/'+fname)
 ```
 
 There is mixed tab and whitespace in the code. When copy&paste the code, it is not working,
@@ -299,9 +299,9 @@ Similar to we walked over a directory with sub directories and files in the unix
 
 ```sh
 for srcColl, colls, objs in coll.walk():
-	print 'C-', srcColl.path
-	for o in objs:
-		print o.name
+    print 'C-', srcColl.path
+    for o in objs:
+        print o.name
 ```
 
 ## Sharing data
@@ -309,8 +309,8 @@ You can set ACLs on data objects and collections in iRODS.
 To check the default ACLs do:
 
 ```py
-session.permissions.get(coll)
-session.permissions.get(obj)
+print session.permissions.get(coll)
+print session.permissions.get(obj)
 ```
 
 ```
@@ -322,7 +322,7 @@ Here we share a collection with the iRODS group public. Every member of the grou
 from irods.access import iRODSAccess
 acl = iRODSAccess('read', coll.path, 'public', session.zone)
 session.permissions.set(acl)
-session.permissions.get(coll)
+print session.permissions.get(coll)
 ```
 
 To withdraw certain ACLs do:
@@ -330,7 +330,7 @@ To withdraw certain ACLs do:
 ```sh
 acl = iRODSAccess('null', coll.path, 'public', session.zone)
 session.permissions.set(acl)
-session.permissions.get(coll)
+print session.permissions.get(coll)
 ```
 
 One can also give 'write' access or set the 'own'ership.
@@ -352,7 +352,7 @@ Now we can filter the results for data objects which carry a user-defined metada
 
 ```py
 filteredQuery = query.filter(DataObjectMeta.name == 'author').\
-						  filter(DataObjectMeta.value == 'Lewis Carroll')
+    filter(DataObjectMeta.value == 'Lewis Carroll')
 print filteredQuery.all()
 ```
 
@@ -407,13 +407,13 @@ which we can use in the query:
 
 ```py
 query = session.query(Collection.name, 
-					  DataObject.name, 
-					  DataObject.checksum, 
-					  DataObject.size, 
-					  DataObjectMeta.value)
+    DataObject.name, 
+    DataObject.checksum, 
+    DataObject.size, 
+    DataObjectMeta.value)
 					  
 filteredQuery = query.filter(DataObjectMeta.name == 'author').\
-						  filter(DataObjectMeta.value == 'Lewis Carroll')
+    filter(DataObjectMeta.value == 'Lewis Carroll')
 print filteredQuery.all()
 ```
 Metadata that the user creates with *obj.metadata.add* or *coll.metadata.add* are accessible via *DataObjectMeta* or *CollectionMeta* respectively. Other metadata is directly stored as attributes in *Collection* or *DataObject*.

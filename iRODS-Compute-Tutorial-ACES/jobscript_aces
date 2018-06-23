@@ -24,4 +24,4 @@ wget -P $TMPDIR/<FILL IN> https://ndownloader.figshare.com/files/4851460
 export DATAPATH=$TMPDIR/<FILL IN>/4851460
 
 # call the program
-python acesWorkflow.py > outputjob_aces
+python acesWorkflow.py > /home/<FILL IN>/iRODS-Compute-Tutorial-ACES/outputjob_aces

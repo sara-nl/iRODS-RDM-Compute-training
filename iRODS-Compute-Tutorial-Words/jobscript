@@ -7,6 +7,6 @@
 #iRODS + Python
 module load icommands
 module load python/2.7.9
-cd /home/<FILL IN>/iRODS-Compute-Tutorial
+cd /home/<FILL IN>/iRODS-Compute-Tutorial-Words
 # call the program
-python wordsWorkflow.py > outputjob
+python wordsWorkflow.py > /home/<FILL IN>/iRODS-Compute-Tutorial-Words/outputjob
