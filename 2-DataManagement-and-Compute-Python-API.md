@@ -279,15 +279,15 @@ import os
 dPath = os.environ['HOME'] + '/aliceInWonderland'
 walk = [dPath]
 while len(walk) > 0:
-	for srcDir, dirs, files in os.walk(walk.pop()):
-		print srcDir, dirs, files
-		walk.extend(dirs)
-   		iPath = iHome + srcDir.split(os.environ['HOME'])[1]
-   		print "CREATE", iPath
-   		newColl = session.collections.create(iPath)
-   		for fname in files:
-			print "CREATE", newColl.path+'/'+fname
-      		session.data_objects.put(srcDir+'/'+fname, newColl.path+'/'+fname)
+    for srcDir, dirs, files in os.walk(walk.pop()):
+        print srcDir, dirs, files
+        walk.extend(dirs)
+        iPath = iHome + srcDir.split(os.environ['HOME'])[1]
+        print "CREATE", iPath
+        newColl = session.collections.create(iPath)
+        for fname in files:
+            print "CREATE", newColl.path+'/'+fname
+            session.data_objects.put(srcDir+'/'+fname, newColl.path+'/'+fname)
 ```
 
 There is mixed tab and whitespace in the code. When copy&paste the code, it is not working,
