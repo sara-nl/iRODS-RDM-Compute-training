@@ -27,6 +27,16 @@ You will:
 - Introducing provenance metadata to results.
 - Submit the workflow to the scheduling system of the HPC cluster.
 
+## Course material
+
+We prepared some parts of the workflow for you. Please download the code with:
+
+```sh
+git clone https://github.com/sara-nl/RDM-Compute-training.git
+cd RDM-Compute-training/iRODS-Compute-Tutorial-Words/
+
+ipython
+```
 
 ## Data on an HPC cluster
 On most HPC clusters you have access to different file systems which come with different advantages and disadvantages. 
@@ -50,13 +60,6 @@ os.environ['TMPDIR']
 ## Compute workflow - Wordcount
 We will now prepare the compute workflow as it should be executed on any worker node in the cluster. We still do that in interactive mode and on the user interface node (remember it behaves as any node in the cluster).
 
-We prepared some parts of the workflow for you. Please download the code with:
-
-```sh
-git clone https://github.com/sara-nl/RDM-Compute-training
-cd RDM-Compute-training/iRODS-Compute-Tutorial-Words
-```
-
 ### Create data folders on **scratch**
 
 ```py
@@ -64,16 +67,20 @@ import os
 from helperFunctions import *
 
 print('Creating directories for analysis and results')
-dataDir = os.environ['TMPDIR']+'/wordcountData'
+dataDir = os.environ['TMPDIR']+'/wordcountData' + '<your id>'
 ensure_dir(dataDir)
-resultsDir = os.environ['TMPDIR']+'/wordcountResults'
+print dataDir
+resultsDir = os.environ['TMPDIR']+'/wordcountResults' + '<your id>'
 ensure_dir(resultsDir)
+print resultsDir
 ```
 
 ### Connecting to iRODS
 
-```py                                                                                                                                                                                                                                        import getpass                                                                                                                                                                                                                               
-pw = getpass.getpass().encode('base64')                                                                                                                                                                                                      ```
+```py
+import getpass
+pw = getpass.getpass().encode('base64')
+```
 
 ```py
 from irods.session import iRODSSession
@@ -123,8 +130,8 @@ f = os.path.basename(resFile)
 count = 0
 
 while f in objNames:
-	f = os.path.basename(resFile) + '_' +str(count)
-	count = count + 1
+    f = os.path.basename(resFile) + '_' +str(count)
+    count = count + 1
 
 #upload
 print('Upload results to: ', coll.path + '/' + f)
@@ -140,7 +147,7 @@ import datetime
 ```py
 obj = session.data_objects.get(coll.path + '/' + f)
 for iPath in iPaths:
-	obj.metadata.add('INPUTDAT', iPath)
+    obj.metadata.add('INPUTDAT', iPath)
 
 obj.metadata.add('ISEARCH', ATTR_NAME + '==' + ATTR_VALUE)
 obj.metadata.add('ISEARCHDATE', str(datetime.date.today()))
@@ -148,6 +155,7 @@ print '\n'.join([item.name +' \t'+ item.value for item in obj.metadata.items()])
 ```
 
 ## Running the python workflow
+Now we transfer the workflow to a python script. Exit ipython.
 We prepared the whole workflow for you. Inspect the file *wordsWorkflow.py* and adjust the parameters:
 
 ```sh
@@ -166,16 +174,16 @@ python wordsWorkflow.py
 ```
 
 ## Submit the workflow to the scheduler
-Open the file 'words_jobscript' and adjust your user name in te line:
+Open the file 'words_jobscript' and adjust your user name and path in the line:
 
 ```sh
-cd /home/<user>/iRODS-Compute-Tutorial
+cd /home/<user>/../iRODS-Compute-Tutorial-Words
 ```
 
 Now you can submit the job to the queue:
 
 ```sh
-qsub words_jobscript
+qsub jobscript
 qstat -u <username>
 ```
 If the job finished successfully the file *jobscript.e...* will be empty, everything which our python scripts gives as output is saved in *outputjob*.
