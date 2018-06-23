@@ -309,8 +309,8 @@ You can set ACLs on data objects and collections in iRODS.
 To check the default ACLs do:
 
 ```py
-session.permissions.get(coll)
-session.permissions.get(obj)
+print session.permissions.get(coll)
+print session.permissions.get(obj)
 ```
 
 ```
@@ -322,7 +322,7 @@ Here we share a collection with the iRODS group public. Every member of the grou
 from irods.access import iRODSAccess
 acl = iRODSAccess('read', coll.path, 'public', session.zone)
 session.permissions.set(acl)
-session.permissions.get(coll)
+print session.permissions.get(coll)
 ```
 
 To withdraw certain ACLs do:
@@ -330,7 +330,7 @@ To withdraw certain ACLs do:
 ```sh
 acl = iRODSAccess('null', coll.path, 'public', session.zone)
 session.permissions.set(acl)
-session.permissions.get(coll)
+print session.permissions.get(coll)
 ```
 
 One can also give 'write' access or set the 'own'ership.
@@ -352,7 +352,7 @@ Now we can filter the results for data objects which carry a user-defined metada
 
 ```py
 filteredQuery = query.filter(DataObjectMeta.name == 'author').\
-						  filter(DataObjectMeta.value == 'Lewis Carroll')
+    filter(DataObjectMeta.value == 'Lewis Carroll')
 print filteredQuery.all()
 ```
 
@@ -379,7 +379,7 @@ for item in results:
             coll = item[k]
         else:
             continue
-        iPaths.append(coll+'/'+name)
+    iPaths.append(coll+'/'+name)
 print '\n'.join(iPaths)
 ```
 
