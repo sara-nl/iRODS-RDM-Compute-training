@@ -18,9 +18,9 @@ ATTR_NAME = 'author'
 ATTR_VALUE = 'Lewis Carroll'
 
 print('Creating directories for analysis and results')
-dataDir = os.environ['TMPDIR']+'/wordcountData'
+dataDir = os.environ['TMPDIR']+'/wordcountData_'+user
 ensure_dir(dataDir)
-resultsDir = os.environ['TMPDIR']+'/wordcountResults'
+resultsDir = os.environ['TMPDIR']+'/wordcountResults_'+user
 ensure_dir(resultsDir)
 
 print('Connect to iRODS')
