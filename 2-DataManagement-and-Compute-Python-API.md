@@ -299,9 +299,9 @@ Similar to we walked over a directory with sub directories and files in the unix
 
 ```sh
 for srcColl, colls, objs in coll.walk():
-	print 'C-', srcColl.path
-	for o in objs:
-		print o.name
+    print 'C-', srcColl.path
+    for o in objs:
+    print o.name
 ```
 
 ## Sharing data
@@ -379,7 +379,7 @@ for item in results:
             coll = item[k]
         else:
             continue
-    iPaths.append(coll+'/'+name)
+        iPaths.append(coll+'/'+name)
 print '\n'.join(iPaths)
 ```
 
@@ -407,13 +407,13 @@ which we can use in the query:
 
 ```py
 query = session.query(Collection.name, 
-					  DataObject.name, 
-					  DataObject.checksum, 
-					  DataObject.size, 
-					  DataObjectMeta.value)
+    DataObject.name, 
+    DataObject.checksum, 
+    DataObject.size, 
+    DataObjectMeta.value)
 					  
 filteredQuery = query.filter(DataObjectMeta.name == 'author').\
-						  filter(DataObjectMeta.value == 'Lewis Carroll')
+    filter(DataObjectMeta.value == 'Lewis Carroll')
 print filteredQuery.all()
 ```
 Metadata that the user creates with *obj.metadata.add* or *coll.metadata.add* are accessible via *DataObjectMeta* or *CollectionMeta* respectively. Other metadata is directly stored as attributes in *Collection* or *DataObject*.
