@@ -249,7 +249,7 @@ coll.subcollections
 ```
 
 ```
-[vars(coll) for coll in coll.subcollections]
+[vars(c) for c in coll.subcollections]
 ```
 ### Remove a Collection
 Remove a collection recursively with all data objects.
@@ -265,7 +265,7 @@ coll = session.collections.get(iHome)
 coll.subcollections
 ```
 ```
-[vars(coll) for coll in coll.subcollections] 
+[vars(c) for c in coll.subcollections] 
 ```
 
 **Exercise** Create a collection, add some data to the collection and add some metadata to the collection (analogously to data object metadata).
