@@ -20,7 +20,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
 
 ## GOAL
 
-In this module we will run a more complex workflow and save results of the compute worflow during their calculations and link them through metadata
+In this module we will run a more complex workflow and save results of the compute worflow during their calculations and link them through metadata.
 
 ## Workflow description
 ACES is a software package that finds and defines feature for classification of cancer patients. It uses as input data some gene expression data and as parameters gene interaction network data. It defines differentially expressed genes and aggregation of genes.
