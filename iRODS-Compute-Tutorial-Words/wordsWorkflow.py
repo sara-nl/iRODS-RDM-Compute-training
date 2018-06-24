@@ -7,7 +7,7 @@ from irods.models import Collection, DataObject, CollectionMeta, DataObjectMeta
 
 #PARAMETERS
 # iRODS connection
-host='145.100.57.185'
+host='<iRODS host>'
 port=1247
 user='<your username>'
 password='<your password>'
