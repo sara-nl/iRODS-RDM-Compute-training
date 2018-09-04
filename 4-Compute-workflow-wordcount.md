@@ -1,4 +1,4 @@
-<img align="left" src="elixir.png" width="100px">
+<img align="left" src="prace.png" width="100px">
 <img align="right" src="surfsara.png" width="100px">
 <br><br>
 
