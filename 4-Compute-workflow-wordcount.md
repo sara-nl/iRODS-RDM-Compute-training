@@ -32,8 +32,9 @@ You will:
 We prepared some parts of the workflow for you. Please download the code with:
 
 ```sh
-git clone https://github.com/sara-nl/RDM-Compute-training.git
-cd RDM-Compute-training/iRODS-Compute-Tutorial-Words/
+git clone https://github.com/sara-nl/iRODS-RDM-Compute-training.git
+git checkout PRACE
+cd iRODS-RDM-Compute-training/iRODS-Compute-Tutorial-Words/
 
 ipython
 ```
