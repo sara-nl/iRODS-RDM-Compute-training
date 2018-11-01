@@ -174,7 +174,7 @@ python wordsWorkflow.py
 ```
 
 ## Submit the workflow to the scheduler
-Open the file 'words_jobscript' and adjust your user name and path in the line:
+Open the file 'jobscript' and adjust your user name and path in the line:
 
 ```sh
 cd /home/<user>/../iRODS-Compute-Tutorial-Words
