@@ -53,6 +53,12 @@ Start an ipython session:
 ipython
 ```
 
+We have all the material on GitHub. You can get all the necessary files by using the following command:
+
+```sh
+git clone https://github.com/sara-nl/RDM-Compute-training.git -b SURF-research-bootcamp
+```
+
 ## Data objects
 ### Connect to iRODS
 To connect 
