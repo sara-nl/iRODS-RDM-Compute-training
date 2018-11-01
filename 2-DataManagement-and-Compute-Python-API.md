@@ -158,10 +158,15 @@ Metadata can be used to search for your own data but also for data that someone 
 **Watch out:** If you do another `data_object.put` you will overwrite not only the bitstream but also all metadata. User-defined metadata will be set to empty.
 
 ### Download a data object
-The current release of the API does not support a 'download' or 'get' function for iRODS objects. It is planned though for the next release.
-We will now stream the data object. Data streaming can become handy when up and downloading large files.
-You first open the file and read its contents into memory:
+The python API also supports a download or 'get' function for iRODS objects, although it is somewhat hidden:
 
+```py
+import os
+filepath='os.environ['HOME']+'/'+os.path.basename(obj.path)'
+obj = session.data_objects.get(obj.path,file=filepath)
+```
+
+<!--
 ```py
 import os
 buff = session.data_objects.open(obj.path, 'r').read()
@@ -169,6 +174,7 @@ print "Downloading to:", os.environ['HOME']+'/'+os.path.basename(obj.path)
 with open(os.environ['HOME']+'/'+os.path.basename(obj.path), 'wb') as f:
     f.write(buff) 
 ```
+-->
 
 **Exercise** Calculate the MD5 checksum for the downloaded data and compare with the data object's checksum in iRODS. (hint: `import hashlib; hashlib.md5(open(<filename>, 'rb').read()).hexdigest()`
 
