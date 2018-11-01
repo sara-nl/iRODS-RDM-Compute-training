@@ -32,7 +32,7 @@ You will:
 We prepared some parts of the workflow for you. Please download the code with:
 
 ```sh
-git clone https://github.com/sara-nl/RDM-Compute-training.git
+git clone https://github.com/sara-nl/RDM-Compute-training.git -b SURF-research-bootcamp
 cd ~/iRODS-RDM-Compute-training/iRODS-Compute-Tutorial-Words/
 
 ipython
