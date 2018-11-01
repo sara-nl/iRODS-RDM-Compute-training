@@ -224,7 +224,7 @@ vars(obj)
 ```
 
 ## iRODS collections
-You can organise your data in iRODS just like on a POSIX file system.
+You can organise your data in iRODS just like on a POSIX file system. We are not going to explore all the options, but only show how to create and remove a collection. 
 
 
 ### Create a collection (even recursively)
@@ -245,6 +245,8 @@ coll.subcollections
  session.data_objects.move(iHome + '/Alice.txt', coll.path)
  coll.data_objects
  ```
+ 
+ <!--
 ### Move a collection
 Just as data objects you can also move and rename collections with all their data objects and subcollections:
 
@@ -257,6 +259,8 @@ coll.subcollections
 ```
 [vars(c) for c in coll.subcollections]
 ```
+-->
+
 ### Remove a Collection
 Remove a collection recursively with all data objects.
 
@@ -276,6 +280,7 @@ coll.subcollections
 
 **Exercise** Create a collection, add some data to the collection and add some metadata to the collection (analogously to data object metadata).
 
+<!--
 ### Upload collection
 To upload a collection from the unix file system one has to iterate over the directory and create collections and data objects.
 We will upload the directory 'aliceInWonderland'
@@ -309,6 +314,9 @@ for srcColl, colls, objs in coll.walk():
     for o in objs:
         print o.name
 ```
+
+-->
+
 
 ## Sharing data
 You can set ACLs on data objects and collections in iRODS. 
