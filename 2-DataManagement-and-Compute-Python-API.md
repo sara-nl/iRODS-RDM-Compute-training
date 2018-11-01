@@ -59,6 +59,11 @@ We have all the material on GitHub. You can get all the necessary files by using
 git clone https://github.com/sara-nl/RDM-Compute-training.git -b SURF-research-bootcamp
 ```
 
+and subsequently go in to the folder:
+```sh
+cd RDM-Compute-training
+```
+
 ## Data objects
 ### Connect to iRODS
 To connect 
