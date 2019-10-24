@@ -1,12 +1,15 @@
+<!--
 <img align="left" src="elixir.png" width="100px">
 <img align="right" src="surfsara.png" width="100px">
 <br><br>
+-->
 
-# Python API for iRODS
+# Introduction Python API for iRODS
 
 **Authors**
 - Arthur Newton (SURFsara)
 - Christine Staiger (SURFsara)
+- Claudia Behnke (SURFsara)
 
 **License**
 Copyright 2018 SURFsara BV
@@ -24,13 +27,14 @@ You will learn how to interact with iRODS via the python API. In this module we 
 - Up and download data collections
 - Add and edit metadata
 - Set Accession control lists for data objects and collections
+- Query for data using user defined metadata
 
-## Exploring the python API to iRODS in interactive mode
+## Exploring the python API to iRODS in ipython
 
 ### Login to the Compute cluster lisa
-
+We will be using the compute cluster Lisa as our user interface. So first we need to login:
 ```
-ssh user@lisa.surfsara.nl
+ssh <USERNAME>@lisa.surfsara.nl
 ```
 
 Now you are on the login node of the lisa HPC cluster. Here you have access to a python compiler and interactive coding environment and we will install the python API for iRODS. The login node behaves like any compute node in a cluster, i.e. when our code works here, it will also work on the compute nodes.
@@ -43,11 +47,12 @@ We are working a client machine providing us with the *ipython* interpreter and 
 Install the *irods-pythonclient*:
 
 ```
-module load python/2.7.9
-pip install python-irodsclient --user
+module load 2019
+module load IPython
+pip install git+https://github.com/irods/python-irodsclient.git@master --user
 ```
 
-Start an ipython session:
+Start an ipython session (first time doing this could take some time):
 
 ```sh
 ipython
@@ -57,23 +62,27 @@ ipython
 ### Connect to iRODS
 To connect 
 
-The module *getpass* asks for passwords without printing the input on screen. With en encoding function we prevent that the variable contains the plain password.
+The module *getpass* asks for passwords without printing the input on screen. With en encoding function we prevent that the variable contains the plain password when we pass it to the iRODS server.
 
 ```py
 import getpass
-pw = getpass.getpass().encode('base64')
+pw = getpass.getpass().encode()
 ```
 Now we can create an iRODS session:
 ```
 from irods.session import iRODSSession
-session = iRODSSession(host='sara-alice.grid.surfsara.nl', port=1247, user='irods-user1', password=pw.decode('base64'), zone='aliceZone')
+session = iRODSSession(host='sara-alice.grid.surfsara.nl', port=1247, user='irods-user1', password=pw.decode(), zone='aliceZone')
 ```
-and test whether we have access:
+
+Note that you will need to change the username to the one you are given. Throughout this course we will assume you are `irods-user1`. 
+
+We can test whether we have done everything correctly and have access:
 
 ```py
 coll = session.collections.get('/aliceZone/home/irods-user1')
-print coll.data_objects
-print coll.subcollections
+print(coll.path)
+print(coll.data_objects)
+print(coll.subcollections)
 ```
 
 So far no data is stored in your iRODS collection. Let us upload some data.
@@ -97,13 +106,13 @@ The object carries some vital system information, otherwise it is empty.
 
 ```
 obj = session.data_objects.get(iPath)
-print "Name: ", obj.name
-print "Owner: ", obj.owner_name
-print "Size: ", obj.size
-print "Checksum:", obj.checksum
-print "Create: ", obj.create_time
-print "Modify: ", obj.modify_time
-print "Metadata: ", obj.metadata.items()
+print("Name: ", obj.name)
+print("Owner: ", obj.owner_name)
+print("Size: ", obj.size)
+print("Checksum:", obj.checksum)
+print("Create: ", obj.create_time)
+print("Modify: ", obj.modify_time)
+print("Metadata: ", obj.metadata.items())
 ```
 
 Less code to write to display the full object:
@@ -119,7 +128,7 @@ You can also rename an iRODS data object or move it to a different collection:
 
 ```py
 session.data_objects.move(obj.path, iHome + '/Alice.txt')
-print coll.data_objects
+print(coll.data_objects)
 ```
 
 **Exercise** What happens if you try to move a data object to an existing data object?
@@ -133,7 +142,7 @@ Currently, our data object does not carry any user-defined metadata:
 ```py
 iPath = iHome + '/Alice.txt'
 obj = session.data_objects.get(iPath)
-print obj.metadata.items()
+print(obj.metadata.items())
 ```
 
 Create a key, value, unit entry for our data object:
@@ -145,7 +154,7 @@ obj.metadata.add('TYPE', 'test file')
 If you now print the metadata again, you will see a cryptic list:
 
 ```py
-print obj.metadata.items()
+print(obj.metadata.items())
 ```
 The list contains two metadata python objects.
 To work with the metadata you need to iterate over them and extract the AVU triples:
@@ -165,7 +174,7 @@ You first open the file and read its contents into memory:
 ```py
 import os
 buff = session.data_objects.open(obj.path, 'r').read()
-print "Downloading to:", os.environ['HOME']+'/'+os.path.basename(obj.path)
+print("Downloading to:", os.environ['HOME']+'/'+os.path.basename(obj.path))
 with open(os.environ['HOME']+'/'+os.path.basename(obj.path), 'wb') as f:
     f.write(buff) 
 ```
@@ -182,13 +191,13 @@ obj = session.data_objects.create(iHome + '/stream.txt')
 This will create a place holder for the data object with no further metadata:
 
 ```py
-print "Name: ", obj.name
-print "Owner: ", obj.owner_name
-print "Size: ", obj.size
-print "Checksum:", obj.checksum
-print "Create: ", obj.create_time
-print "Modify: ", obj.modify_time
-print "Metadata: ", obj.metadata.items()
+print("Name: ", obj.name)
+print("Owner: ", obj.owner_name)
+print("Size: ", obj.size)
+print("Checksum:", obj.checksum)
+print("Create: ", obj.create_time)
+print("Modify: ", obj.modify_time)
+print("Metadata: ", obj.metadata.items())
 ```
 
 ```
@@ -205,13 +214,13 @@ obj = session.data_objects.get(iHome + '/stream.txt')
 Now we check the metadata again:
 
 ```py
-print "Name: ", obj.name
-print "Owner: ", obj.owner_name
-print "Size: ", obj.size
-print "Checksum:", obj.checksum
-print "Create: ", obj.create_time
-print "Modify: ", obj.modify_time
-print "Metadata: ", obj.metadata.items()
+print("Name: ", obj.name)
+print("Owner: ", obj.owner_name)
+print("Size: ", obj.size)
+print("Checksum:", obj.checksum)
+print("Create: ", obj.create_time)
+print("Modify: ", obj.modify_time)
+print("Metadata: ", obj.metadata.items())
 ```
 ```
 vars(obj)
@@ -280,13 +289,13 @@ dPath = os.environ['HOME'] + '/aliceInWonderland'
 walk = [dPath]
 while len(walk) > 0:
     for srcDir, dirs, files in os.walk(walk.pop()):
-        print srcDir, dirs, files
+        print(srcDir, dirs, files)
         walk.extend(dirs)
         iPath = iHome + srcDir.split(os.environ['HOME'])[1]
-        print "CREATE", iPath
+        print("CREATE", iPath)
         newColl = session.collections.create(iPath)
         for fname in files:
-            print "CREATE", newColl.path+'/'+fname
+            print("CREATE", newColl.path+'/'+fname)
             session.data_objects.put(srcDir+'/'+fname, newColl.path+'/'+fname)
 ```
 
@@ -299,9 +308,9 @@ Similar to we walked over a directory with sub directories and files in the unix
 
 ```sh
 for srcColl, colls, objs in coll.walk():
-    print 'C-', srcColl.path
+    print('C-', srcColl.path)
     for o in objs:
-        print o.name
+        print(o.name)
 ```
 
 ## Sharing data
@@ -309,8 +318,8 @@ You can set ACLs on data objects and collections in iRODS.
 To check the default ACLs do:
 
 ```py
-print session.permissions.get(coll)
-print session.permissions.get(obj)
+print(session.permissions.get(coll))
+print(session.permissions.get(obj))
 ```
 
 ```
@@ -322,7 +331,7 @@ Here we share a collection with the iRODS group public. Every member of the grou
 from irods.access import iRODSAccess
 acl = iRODSAccess('read', coll.path, 'public', session.zone)
 session.permissions.set(acl)
-print session.permissions.get(coll)
+print(session.permissions.get(coll))
 ```
 
 To withdraw certain ACLs do:
@@ -330,7 +339,7 @@ To withdraw certain ACLs do:
 ```sh
 acl = iRODSAccess('null', coll.path, 'public', session.zone)
 session.permissions.set(acl)
-print session.permissions.get(coll)
+print(session.permissions.get(coll))
 ```
 
 One can also give 'write' access or set the 'own'ership.
@@ -353,7 +362,7 @@ Now we can filter the results for data objects which carry a user-defined metada
 ```py
 filteredQuery = query.filter(DataObjectMeta.name == 'author').\
     filter(DataObjectMeta.value == 'Lewis Carroll')
-print filteredQuery.all()
+print(filteredQuery.all())
 ```
 
 Python prints the results neatly on the prompt, however to extract the information and parsing it to other functions is pretty complicated. Every entry you see in the output is not a string, but actually a python object with many functions. That gives you the advantage to link the output to the rows and comlumns in the sql database running in the background of iRODS. For normal user interaction, however, it needs some explanation and help.
@@ -380,7 +389,7 @@ for item in results:
         else:
             continue
     iPaths.append(coll+'/'+name)
-print '\n'.join(iPaths)
+print('\n'.join(iPaths))
 ```
 
 How did we know which keys to use? 
@@ -388,8 +397,8 @@ We asked in the query for *Collection.name* and *DataObject.name*.
 Have look at these two objects:
 
 ```py
-print Collection.name.icat_key
-print DataObject.name.icat_key
+print(Collection.name.icat_key)
+print(DataObject.name.icat_key)
 ```
 The *icat_key* is the keyword used in the database behind iRODS to store the information.
 
@@ -414,7 +423,7 @@ query = session.query(Collection.name,
 					  
 filteredQuery = query.filter(DataObjectMeta.name == 'author').\
     filter(DataObjectMeta.value == 'Lewis Carroll')
-print filteredQuery.all()
+print(filteredQuery.all())
 ```
 Metadata that the user creates with *obj.metadata.add* or *coll.metadata.add* are accessible via *DataObjectMeta* or *CollectionMeta* respectively. Other metadata is directly stored as attributes in *Collection* or *DataObject*.
 
