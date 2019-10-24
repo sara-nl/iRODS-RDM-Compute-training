@@ -1,5 +1,3 @@
-
-<img align="left" src="elixir.png" width="100px">
 <img align="right" src="surfsara.png" width="100px">
 <br><br>
 
@@ -23,10 +21,14 @@ Unless required by applicable law or agreed to in writing, software distributed 
 In this module we will run a more complex workflow and save results of the compute worflow during their calculations and link them through metadata.
 
 ## Workflow description
-ACES is a software package that finds and defines feature for classification of cancer patients. It uses as input data some gene expression data and as parameters gene interaction network data. It defines differentially expressed genes and aggregation of genes.
+ACES is a software package that finds and defines feature for classification of cancer patients. 
+It uses as input data some gene expression data and as parameters gene interaction network data. 
+It defines differentially expressed genes and aggregation of genes.
 
-- Download some published data from a repository (FigShare). This data will serve as input data.
-- Search in the iRODS instance for some additional data. We prepared some biological gene network data in the iRODS instance which the pipeline takes as parameter.
+- Download some published data from a repository (FigShare). 
+This data will serve as input data.
+- Search in the iRODS instance for some additional data. 
+We prepared some biological gene network data in the iRODS instance which the pipeline takes as parameter.
 - The code will execute a five-fold cross validtaion
 - Results: a ranking of the features and performances measured in Area under the receiver operator curve (AUC)
 

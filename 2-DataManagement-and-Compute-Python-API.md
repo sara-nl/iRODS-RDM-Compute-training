@@ -1,8 +1,5 @@
-<!--
-<img align="left" src="elixir.png" width="100px">
 <img align="right" src="surfsara.png" width="100px">
 <br><br>
--->
 
 # Introduction Python API for iRODS
 
