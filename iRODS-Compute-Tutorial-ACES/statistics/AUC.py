@@ -50,9 +50,9 @@ def CalculateAUC(scores, outcomes):
     aucVal = float(TwiceArea) / float(2 * TP * (n - TP))
     #fpr, tpr, thresholds = roc_curve(outcomes, scores)
     #tscikitsAuc = auc(fpr, tpr)
-    #print "*********************************************"
-    #print "Debug: auc", aucVal, "scikits", tscikitsAuc     
-    #print "*********************************************"
+    #print("*********************************************")
+    #print("Debug: auc", aucVal, "scikits", tscikitsAuc) 
+    #print("*********************************************")
 
     return aucVal
 

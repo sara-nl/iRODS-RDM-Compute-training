@@ -5,8 +5,9 @@
 #PBS -lwalltime=00:10:00 -lnodes=1
 
 #iRODS + Python
+module load pre2019
 module load icommands
-module load python/2.7.9
+module load Python
 cd /home/<FILL IN>/iRODS-Compute-Tutorial-ACES
 
 #parameters for iRODS connection

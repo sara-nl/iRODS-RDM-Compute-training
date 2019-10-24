@@ -96,6 +96,6 @@ def ReadGeneSetCollection(geneSetCollectionName, filename, prefix = None):
 
     f.close()
 
-    print "NOTE: ReadGeneSetCollection(\"%s\", \"%s\"): read %d genesets." % (geneSetCollectionName, filename, len (geneSets))
+    print("NOTE: ReadGeneSetCollection(\"%s\", \"%s\"): read %d genesets." % (geneSetCollectionName, filename, len (geneSets)))
 
     return GeneSetCollection(geneSetCollectionName, geneSets, geneSetsNames, release)

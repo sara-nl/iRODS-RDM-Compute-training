@@ -55,10 +55,10 @@ def main():
     x = numpy.array(x)
     y = numpy.array(y)
 
-    print x
-    print y
+    print(x)
+    print(y)
 
-    print OneSided_Wilcoxon(x, y)
+    print(OneSided_Wilcoxon(x, y))
 
 if __name__ == "__main__":
     main()

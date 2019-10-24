@@ -21,8 +21,8 @@ def ensure_dir(directory):
 #wordcount program
 #simple wordcount function which counts every instance of a word, note case sensitive
 def wordcount(dataFiles, resultsDir):
-    print dataFiles
-    print resultsDir
+    print(dataFiles)
+    print(resultsDir)
     words = []
     for path in dataFiles:
         with open(path) as f:
@@ -30,7 +30,7 @@ def wordcount(dataFiles, resultsDir):
         newWords = [''.join(char for char in word
              if char not in string.punctuation) for word in text]
         words.extend(newWords)
-    print len(words)
+    print(len(words))
 
     numWords = Counter(words)
 
@@ -76,7 +76,7 @@ def iGetList(sess, iPaths, destFolder):
     destFolder - Location, unix filesystem
     """
     ensure_dir(destFolder)
-    print "Write to: ", destFolder
+    print("Write to: ", destFolder)
     for iPath in iPaths:
         buff = sess.data_objects.open(iPath, 'r').read()
         with open(destFolder+'/'+os.path.basename(iPath), 'wb') as f:
@@ -121,6 +121,6 @@ def iLsColl(sess, iPath):
 
     iColl = sess.collections.get(iPath)
     for srcColl, subColls, objs in iColl.walk():
-        print "-C "+srcColl.path
-        print "\n".join(["    "+obj.path for obj in objs])
+        print("-C "+srcColl.path)
+        print("\n".join(["    "+obj.path for obj in objs]))
 

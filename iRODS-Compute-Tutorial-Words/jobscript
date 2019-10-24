@@ -5,8 +5,8 @@
 #PBS -lwalltime=00:04:00 -lnodes=1
 
 #iRODS + Python
-module load icommands
-module load python/2.7.9
+module load 2019
+module load Python
 cd /home/<FILL IN>/iRODS-Compute-Tutorial-Words
 # call the program
 python wordsWorkflow.py > /home/<FILL IN>/iRODS-Compute-Tutorial-Words/outputjob

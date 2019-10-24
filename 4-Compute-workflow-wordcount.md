@@ -69,10 +69,10 @@ from helperFunctions import *
 print('Creating directories for analysis and results')
 dataDir = os.environ['TMPDIR']+'/wordcountData' + '<your id>'
 ensure_dir(dataDir)
-print dataDir
+print(dataDir)
 resultsDir = os.environ['TMPDIR']+'/wordcountResults' + '<your id>'
 ensure_dir(resultsDir)
-print resultsDir
+print(resultsDir)
 ```
 
 ### Connecting to iRODS
@@ -99,7 +99,7 @@ ATTR_VALUE = 'Lewis Carroll'
 query = session.query(Collection.name, DataObject.name)
 filteredQuery = query.filter(DataObjectMeta.name == ATTR_NAME).\
                           filter(DataObjectMeta.value == ATTR_VALUE)
-print filteredQuery.all()
+print(filteredQuery.all())
 iPaths = iParseQuery(filteredQuery)
 ```
 
@@ -107,8 +107,8 @@ iPaths = iParseQuery(filteredQuery)
 Remember from the first part of the tutorial, that for downloading data from iRODS you first have to read the data object into memory and after that write it to a file on your local filesystem. For convenience we provide a function wich does that for us for a list of data objects.
 
 ```py
-print 'Downloading: '
-print '\n'.join(iPaths)
+print('Downloading: ')
+print('\n'.join(iPaths))
 iGetList(session, iPaths, dataDir)
 ```
 
@@ -151,7 +151,7 @@ for iPath in iPaths:
 
 obj.metadata.add('ISEARCH', ATTR_NAME + '==' + ATTR_VALUE)
 obj.metadata.add('ISEARCHDATE', str(datetime.date.today()))
-print '\n'.join([item.name +' \t'+ item.value for item in obj.metadata.items()])
+print('\n'.join([item.name +' \t'+ item.value for item in obj.metadata.items()]))
 ```
 
 ## Running the python workflow

@@ -32,7 +32,6 @@ print('Input data is stored here: '+dataDir)
 resultsDir = os.path.dirname(os.environ['DATAPATH']).replace('data_', 'results_')
 ensure_dir(resultsDir)
 print('Output data is stored here: '+resultsDir)
-print
 
 session = iRODSSession(host=host, port=port, user=user, password=password, zone=zone)
 #Search for input data and store it in the folder where the figshare data is located
@@ -58,7 +57,6 @@ while resultsName in collNames:
         count = count + 1
 print('Upload results to: '+ coll.path + '/' + resultsName)
 coll = session.collections.create(coll.path + '/' + resultsName)
-print
 
 # Calculate results
 DataAndFeatureExtractors = CombineData()
@@ -72,11 +70,11 @@ for item in DataAndFeatureExtractors:
         method = token['input']['method']
         repeat = token['input']['repeat']
         fold = token['input']['fold']
-        print 'dataset:', dataset
-        print 'network', network
-        print 'method', method
-        print 'repeat', repeat
-        print 'fold', fold
+        print('dataset:', dataset)
+        print('network', network)
+        print('method', method)
+        print('repeat', repeat)
+        print('fold', fold)
         (dataName, featureExtractorproductName, netName, shuffle, featureExtractor, AucAndCi) = RunInstance(
                     data, net, featureSelector, None, classifiers, repeat, 5, fold, None, Dataset2Time, None)
         token['output'] = (dataName, featureExtractorproductName, netName, None, shuffle, featureExtractor, AucAndCi)

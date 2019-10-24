@@ -31,7 +31,7 @@ class ExpressionDataset(object):
             assert self.numPatientsGoodOutcome + self.numPatientsBadOutcome == self.numPatients
 
         if checkNormalization and not self.checkIfExpressionDataProperlyNormalized():
-            print "INFO: dataset %s is not properly normalized; normalizing now!" % self.name
+            print("INFO: dataset %s is not properly normalized; normalizing now!" % self.name)
             self.performNormalization()
 
     def isCompatibleWith(self, other):
@@ -96,7 +96,7 @@ class ExpressionDataset(object):
 
     # This function is needed for the Dao feature extractor
     def writeToFile(self, filename):
-        #print "TODO: write to file"        
+        #print("TODO: write to file") 
         f = open(filename, "w")
         L = list(self.patientLabels)
         f.write("Gene")
@@ -192,7 +192,7 @@ def HDF5GroupToExpressionDataset(group, checkNormalise = True, prefix="Entrez_")
     patientLabels      = numpy.array(group["PatientLabels"])
     
     if not checkNormalise:
-        print "Warning: z-Normalisation not guaranteed. Use checkNormalise = True!"
+        print("Warning: z-Normalisation not guaranteed. Use checkNormalise = True!")
 
     if str(patientLabels.dtype).startswith('int'):
         patientLabels = numpy.array(["%s/%d" % (datasetName, patientLabel) for patientLabel in patientLabels])
@@ -204,8 +204,8 @@ def HDF5GroupToExpressionDataset(group, checkNormalise = True, prefix="Entrez_")
         if geneLabels[0].startswith(prefix):
             geneLabels    = numpy.array(["%s" % geneLabel for geneLabel in geneLabels])
         else:
-            print "Gene labels ", geneLabels[0]
-            print "Adding prefix."
+            print("Gene labels ", geneLabels[0])
+            print("Adding prefix.")
             geneLabels    = numpy.array([prefix+"%s" % geneLabel for geneLabel in geneLabels])
     
     assert len(set(patientClassLabels.tolist())) <= 2
@@ -215,6 +215,6 @@ def HDF5GroupToExpressionDataset(group, checkNormalise = True, prefix="Entrez_")
 
     ds = ExpressionDataset(datasetName, expressionData, geneLabels, patientClassLabels, patientLabels, checkNormalization = checkNormalise)
 
-    print "NOTE: HDF5GroupToExpressionDataset -- read", ds
+    print("NOTE: HDF5GroupToExpressionDataset -- read", ds)
 
     return ds

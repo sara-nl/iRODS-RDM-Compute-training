@@ -47,7 +47,7 @@ def CalculateFeatureCountDependentPerformanceCurve(featureExtractor, classifierF
     # For each of the number of features, determine the auc value.
     # Return a map of feature-count to corresponding AUC value.
 
-    print "-->", dsTraining.name, dsTesting.name
+    print("-->", dsTraining.name, dsTesting.name)
 
     result = {}
     for nf in featureCounts:
@@ -60,7 +60,7 @@ def CalculateFeatureCountDependentPerformanceCurve(featureExtractor, classifierF
     return result
 
 def CalculateFeatureCountDependentPerformance(featureExtractor, classifierFactory, (dsTraining, dsTesting), ERlabels = None):
-    print "-->", dsTraining.name, dsTesting.name
+    print("-->", dsTraining.name, dsTesting.name)
 
     result = {}
     auc, ci = DetermineAUCandCI(featureExtractor, featureExtractor.validFeatureCounts, classifierFactory, (dsTraining, dsTesting), ERlabels = ERlabels)

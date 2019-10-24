@@ -129,7 +129,7 @@ class LeeFeatureExtractorFactory(object):
                 features.append(corg)
 
         if len(features)  < len(corgs):
-            print "WARNING: removed duplicate corgs (%d corgs -> %d features)" % (len(corgs), len(features))
+            print("WARNING: removed duplicate corgs (%d corgs -> %d features)" % (len(corgs), len(features)))
 
         return LeeFeatureExtractor(dataset.geneLabels, features)
 

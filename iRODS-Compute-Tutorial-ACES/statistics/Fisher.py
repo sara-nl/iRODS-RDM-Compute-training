@@ -110,7 +110,7 @@ def main():
         r_L = fisherR(table, alternative = "l").rx2("p.value")[0]
 
         if r_T == 0.0 or r_G == 0.0 or r_L == 0.0:
-            print "Skipping case", a, b, c, d, " due to R yielding zero:", r_T, r_G, r_L
+            print("Skipping case", a, b, c, d, " due to R yielding zero:", r_T, r_G, r_L)
             continue
 
         # This would yield an overflow in case of zero values.
@@ -136,12 +136,11 @@ def main():
         epsilon = 1e-12
         if abs(errT) > epsilon or abs(errG) > epsilon or abs(errL) > epsilon:
             nFAIL = nFAIL + 1
-            print "T", a, b, c, d, r_T, myT
-            print "G", a, b, c, d, r_G, myG
-            print "L", a, b, c, d, r_L, myL
-            print
+            print("T", a, b, c, d, r_T, myT)
+            print("G", a, b, c, d, r_G, myG)
+            print("L", a, b, c, d, r_L, myL)
 
-    print "Number of test failures:",nFAIL
+    print("Number of test failures:",nFAIL)
 
 if __name__ == "__main__":
     # Run testcases

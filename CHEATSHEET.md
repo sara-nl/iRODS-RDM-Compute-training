@@ -85,13 +85,13 @@ dPath = os.environ['HOME'] + '/aliceInWonderland'
 walk = [dPath]
 while len(walk) > 0:
 	for srcDir, dirs, files in os.walk(walk.pop()):
-		print srcDir, dirs, files
+		print(srcDir, dirs, files)
 		walk.extend(dirs)
    		iPath = iHome + srcDir.split(os.environ['HOME'])[1]
-   		print "CREATE", iPath
+   		print("CREATE", iPath)
    		newColl = session.collections.create(iPath)
    		for fname in files:
-			print "CREATE", newColl.path+'/'+fname
+			print("CREATE", newColl.path+'/'+fname)
       		session.data_objects.put(srcDir+'/'+fname, newColl.path+'/'+fname)
 ```
 
@@ -99,9 +99,9 @@ while len(walk) > 0:
 
 ```sh
 for srcColl, colls, objs in coll.walk():
-	print 'C-', srcColl.path
+	print('C-', srcColl.path)
 	for o in objs:
-		print o.name
+		print(o.name)
 ```
 
 ## Sharing data
@@ -131,7 +131,7 @@ query = session.query(Collection.name,
 					  
 filteredQuery = query.filter(DataObjectMeta.name == 'author').\
 						  filter(DataObjectMeta.value == 'Lewis Carroll')
-print filteredQuery.all()
+print(filteredQuery.all())
 ```
 
 ### Parsing the iquest output
@@ -156,5 +156,5 @@ for item in results:
         else:
             continue
     iPaths.append(coll+'/'+name)
-print '\n'.join(iPaths)
+print('\n'.join(iPaths))
 ```

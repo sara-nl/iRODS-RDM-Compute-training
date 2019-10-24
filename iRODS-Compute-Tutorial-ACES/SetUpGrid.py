@@ -46,7 +46,7 @@ def SetUpRun(dataset, network, method, datafile = "4851460", datapath = '..'):
 
     #get data from figshare
     # wget -P data/ https://ndownloader.figshare.com/files/4851460
-    #print "Downloading data from figshare."
+    #print("Downloading data from figshare.")
     #PATH = "data/"
     #wget = ["wget", "-P", PATH, "https://ndownloader.figshare.com/files/4851460"]  
     #proc = subprocess.Popen(wget, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
@@ -68,7 +68,7 @@ def SetUpRun(dataset, network, method, datafile = "4851460", datapath = '..'):
         net = ReadSIF("KEGG"  , datapath+"/KEGG_edges1210.sif" , "Entrez_")
     elif network == None:
         net = None
-        print "SG no network"
+        print("SG no network")
     else:
         raise Exception("Network not known. Add network in SetUpGrid/SetUpRun.")
 
@@ -112,7 +112,7 @@ def RunInstance(data, net, featureSelector, special, classifiers, repeat, nrFold
     maxFeatureCount = 400
     AucAndCi = {}
     for CF in classifiers:
-        print "-->", CF.productName
+        print("-->", CF.productName)
         featureCounts = [fc for fc in featureExtractor.validFeatureCounts if fc <= maxFeatureCount]
         nf_to_auc = CalculateFeatureCountDependentPerformanceCurve(
            featureExtractor,

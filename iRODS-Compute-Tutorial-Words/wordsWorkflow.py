@@ -30,7 +30,7 @@ print('Searching for files')
 query = session.query(Collection.name, DataObject.name)
 filteredQuery = query.filter(DataObjectMeta.name == ATTR_NAME).\
                           filter(DataObjectMeta.value == ATTR_VALUE)
-print filteredQuery.all()
+print(filteredQuery.all())
 iPaths = iParseQuery(filteredQuery)
 
 print('Downloading: ')
