@@ -30,11 +30,18 @@ You will learn how to interact with iRODS via the python API. In this module we 
 
 ### Login to the Compute cluster lisa
 We will be using the compute cluster Lisa as our user interface. So first we need to login:
+
 ```
 ssh <USERNAME>@lisa.surfsara.nl
 ```
 
 Now you are on the login node of the lisa HPC cluster. Here you have access to a python compiler and interactive coding environment and we will install the python API for iRODS. The login node behaves like any compute node in a cluster, i.e. when our code works here, it will also work on the compute nodes.
+
+The course material is on Sara NL Github. Please clone the repository when you are logged in to Lisa and are in your home folder:
+
+```
+git clone https://github.com/sara-nl/iRODS-RDM-Compute-training.git
+```
 
 ### Prerequisites
 - [python-irodsclient](https://github.com/irods/python-irodsclient)
