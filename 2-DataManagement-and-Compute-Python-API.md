@@ -161,7 +161,9 @@ To work with the metadata you need to iterate over them and extract the AVU trip
 ```
 Metadata can be used to search for your own data but also for data that someone shared with you. You do not need to know the exact iRODS logical path to retrieve the file, you can search for data wich is annotated accordingly. We will see that in the next section.
 
+<!--
 **Watch out:** If you do another `data_object.put` you will overwrite not only the bitstream but also all metadata. User-defined metadata will be set to empty.
+-->
 
 ### Download a data object
 The current release of the API does not support a 'download' or 'get' function for iRODS objects. It is planned though for the next release.
