@@ -166,16 +166,12 @@ Metadata can be used to search for your own data but also for data that someone 
 -->
 
 ### Download a data object
-The current release of the API does not support a 'download' or 'get' function for iRODS objects. It is planned though for the next release.
-We will now stream the data object. Data streaming can become handy when up and downloading large files.
-You first open the file and read its contents into memory:
+We can download a data object as follows (note that we use the environment variable 'HOME' that is defined to be your Lisa homefolder):
 
 ```py
 import os
-buff = session.data_objects.open(obj.path, 'r').read()
-print("Downloading to:", os.environ['HOME']+'/'+os.path.basename(obj.path))
-with open(os.environ['HOME']+'/'+os.path.basename(obj.path), 'wb') as f:
-    f.write(buff) 
+localpath = os.environ['HOME']+'/'+os.path.basename(obj.path)
+obj = session.data_objects.get(obj.path,file=localpath)
 ```
 
 **Exercise** Calculate the MD5 checksum for the downloaded data and compare with the data object's checksum in iRODS. (hint: `import hashlib; hashlib.md5(open(<filename>, 'rb').read()).hexdigest()`
