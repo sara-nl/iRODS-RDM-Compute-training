@@ -1,8 +1,7 @@
-# shell for the job:
-#PBS -S /bin/bash
-# job requires at most 0 hours, 4 minutes
-# and 0 seconds wallclock time :
-#PBS -lwalltime=00:04:00 -lnodes=1
+#!/bin/bash
+#Set job requirements
+#SBATCH -N 1
+#SBATCH -t 4:00
 
 #iRODS + Python
 module load 2019
