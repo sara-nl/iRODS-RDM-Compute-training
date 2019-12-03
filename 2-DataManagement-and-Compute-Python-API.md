@@ -187,7 +187,7 @@ obj = session.data_objects.get(obj.path,file=localpath)
 Streaming data is an alternative to upload large data to iRODS or to accumulate data in a data object over time. First you need to create an empty data object in iRODS beofre you can stream in the data.
 
 ```py
-content = 'My contents!'
+content = 'My contents!'.encode()
 obj = session.data_objects.create(iHome + '/stream.txt')
 ```
 This will create a place holder for the data object with no further metadata:
