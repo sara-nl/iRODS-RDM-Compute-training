@@ -182,8 +182,8 @@ cd /home/<user>/../iRODS-Compute-Tutorial-Words
 Now you can submit the job to the queue:
 
 ```sh
-qsub jobscript
-qstat -u <username>
+sbatch jobscript
+squeue -u <username>
 ```
 If the job finished successfully the file *jobscript.e...* will be empty, everything which our python scripts gives as output is saved in *outputjob*.
 Now we can check with a graphical user interface whether the data is really there.

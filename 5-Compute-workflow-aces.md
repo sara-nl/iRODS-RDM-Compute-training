@@ -47,15 +47,15 @@ We see that the pipeline reads in some environment variables which need to be de
 Adjust all parameters in the jobscript `jobscript_aces`:
 
 ```sh
-# shell for the job:
-#PBS -S /bin/bash
-# job requires at most 0 hours, 10 minutes
-# and 0 seconds wallclock time:
-#PBS -lwalltime=00:10:00 -lnodes=1
+#!/bin/bash
+#Set job requirements
+#SBATCH -N 1
+#SBATCH -t 15:00
 
 #iRODS + Python
+module load pre2019
 module load icommands
-module load python/2.7.9
+module load Python
 cd /home/<FILL IN>/iRODS-Compute-Tutorial-ACES
 
 #parameters for iRODS connection

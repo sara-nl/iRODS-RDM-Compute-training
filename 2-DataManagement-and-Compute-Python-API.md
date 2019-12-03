@@ -287,7 +287,7 @@ We will upload the directory 'aliceInWonderland'
 
 ```py
 import os
-dPath = os.environ['HOME'] + '/aliceInWonderland'
+dPath = os.environ['HOME'] + '/iRODS-RDM-Compute-training/aliceInWonderland'
 walk = [dPath]
 while len(walk) > 0:
     for srcDir, dirs, files in os.walk(walk.pop()):
